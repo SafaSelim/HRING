@@ -1,4 +1,5 @@
 import { html } from 'lit';
+import { iconEdit, iconTrash } from '../../assets/icons.js';
 
 export function employeeListTableTemplate(ctx, t) {
   return html`
@@ -20,8 +21,8 @@ export function employeeListTableTemplate(ctx, t) {
             <td>${t.departments[emp.department] || emp.department}</td>
             <td>${t.positions[emp.position] || emp.position}</td>
             <td class="actions">
-              <button @click=${() => ctx._onEdit(emp.id)}>${t.employee.edit}</button>
-              <button @click=${() => ctx._onDelete(emp.id)}>${t.employee.delete}</button>
+              <button @click=${() => ctx._onEdit(emp.id)} title="${t.employee.edit}" aria-label="${t.employee.edit}">${iconEdit}</button>
+              <button @click=${() => ctx._onDelete(emp.id)} title="${t.employee.delete}" aria-label="${t.employee.delete}">${iconTrash}</button>
             </td>
           </tr>
         `)}
@@ -41,8 +42,8 @@ export function employeeListListTemplate(ctx, t) {
             ${t.employee.position}: ${t.positions[emp.position] || emp.position}
           </div>
           <div class="actions">
-            <button @click=${() => ctx._onEdit(emp.id)}>${t.employee.edit}</button>
-            <button @click=${() => ctx._onDelete(emp.id)}>${t.employee.delete}</button>
+            <button @click=${() => ctx._onEdit(emp.id)} title="${t.employee.edit}" aria-label="${t.employee.edit}">${iconEdit}</button>
+            <button @click=${() => ctx._onDelete(emp.id)} title="${t.employee.delete}" aria-label="${t.employee.delete}">${iconTrash}</button>
           </div>
         </div>
       `)}

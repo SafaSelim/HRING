@@ -1,10 +1,11 @@
-import { LitElement } from 'lit';
+import { LitElement, html } from 'lit';
 import { store } from '../../state/store.js';
 import { selectAllEmployees } from '../../state/employees/employees.selectors.js';
 import { deleteEmployee as deleteEmployeeAction } from '../../state/employees/employees.slice.js';
-import { getLocale } from '../../i18n/index.js';
+import { getLocale } from '../../assets/i18n/index.js';
 import { employeeListStyles } from './employee-list.styles.js';
 import { employeeListTableTemplate, employeeListListTemplate } from './employee-list.template.js';
+import { Router } from '@vaadin/router';
 
 export class EmployeeList extends LitElement {
   static properties = {
@@ -33,10 +34,13 @@ export class EmployeeList extends LitElement {
       this._updateEmployees();
     });
     this._updateEmployees();
+    this._onLang = () => this.requestUpdate();
+    window.addEventListener('lang-changed', this._onLang);
   }
 
   disconnectedCallback() {
     if (this.unsubscribe) this.unsubscribe();
+    window.removeEventListener('lang-changed', this._onLang);
     super.disconnectedCallback();
   }
 
@@ -54,11 +58,13 @@ export class EmployeeList extends LitElement {
   }
 
   _onPageChange(delta) {
-    this.page += delta;
+    const next = this.page + delta;
+    const max = this._totalPages;
+    this.page = Math.min(Math.max(1, next), max);
   }
 
   _onEdit(id) {
-    window.dispatchEvent(new CustomEvent('navigate', { detail: { path: `/edit/${id}` } }));
+    Router.go(`/edit/${id}`);
   }
 
   _onDelete(id) {

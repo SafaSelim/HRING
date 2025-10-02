@@ -1,10 +1,11 @@
 import { LitElement } from 'lit';
-import { getLocale } from '../../i18n/index.js';
+import { getLocale } from '../../assets/i18n/index.js';
 import { store } from '../../state/store.js';
 import { selectAllEmployees } from '../../state/employees/employees.selectors.js';
 import { addEmployee as addEmployeeAction, updateEmployee as updateEmployeeAction } from '../../state/employees/employees.slice.js';
 import { employeeFormStyles } from './employee-form.styles.js';
 import { employeeFormTemplate } from './employee-form.template.js';
+import { Router } from '@vaadin/router';
 
 export class EmployeeForm extends LitElement {
   static properties = {
@@ -31,10 +32,13 @@ export class EmployeeForm extends LitElement {
     });
     this._updateEmployees();
     this._initMode();
+    this._onLang = () => this.requestUpdate();
+    window.addEventListener('lang-changed', this._onLang);
   }
 
   disconnectedCallback() {
     if (this.unsubscribe) this.unsubscribe();
+    window.removeEventListener('lang-changed', this._onLang);
     super.disconnectedCallback();
   }
 
@@ -77,19 +81,15 @@ export class EmployeeForm extends LitElement {
   _validate() {
     const t = getLocale();
     const errors = {};
-    // Required fields
     for (const key of Object.keys(this.form)) {
       if (!this.form[key]) errors[key] = t.validation.required;
     }
-    // Email format
     if (this.form.email && !/^\S+@\S+\.\S+$/.test(this.form.email)) {
       errors.email = t.validation.email;
     }
-    // Phone format (simple)
     if (this.form.phoneNumber && !/^\+?\d{10,15}$/.test(this.form.phoneNumber)) {
       errors.phoneNumber = t.validation.phone;
     }
-    // Unique constraint (for add)
     if (this.mode === 'add') {
       const exists = (this._employees || []).some(e =>
         e.firstName === this.form.firstName &&
@@ -112,15 +112,15 @@ export class EmployeeForm extends LitElement {
     const t = getLocale();
     if (this.mode === 'edit') {
       if (!window.confirm(t.employee.confirmUpdate)) return;
-      store.dispatch(updateEmployeeAction({ id: this.employeeId, changes: this.form }));
+      store.dispatch(updateEmployeeAction({ id: this.employeeId, updated: this.form }));
     } else {
       store.dispatch(addEmployeeAction({ ...this.form, id: Date.now().toString() }));
     }
-    window.location.href = '/employees';
+    Router.go('/employees');
   }
 
   _onCancel() {
-    window.location.href = '/employees';
+    Router.go('/employees');
   }
 
   render() {

@@ -1,6 +1,6 @@
 // Turkish translations placeholder
 export default {
-  appTitle: 'HRING Çalışan Yönetimi',
+  appTitle: 'ING',
   nav: {
     employees: 'Çalışanlar',
     add: 'Çalışan Ekle',
@@ -38,4 +38,4 @@ export default {
     phone: 'Geçersiz telefon numarası.',
     unique: 'Çalışan zaten mevcut.'
   }
-};
+}; 
