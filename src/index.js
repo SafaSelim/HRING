@@ -1,1 +1,1 @@
-export {HRingApp} from './hring-app.js';
+export { MainApp } from './main-app.js';

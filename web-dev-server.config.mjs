@@ -1,5 +1,5 @@
 export default {
-  rootDir: '.',
+  rootDir: './src',
   nodeResolve: true,
   open: '/employees',
   watch: true,

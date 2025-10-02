@@ -7,4 +7,4 @@ const locales = { en, tr };
 export function getLocale() {
   const lang = document.documentElement.lang || 'en';
   return locales[lang] || en;
-}
+} 

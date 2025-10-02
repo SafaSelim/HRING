@@ -1,4 +1,6 @@
 import { LitElement, html, css } from 'lit';
+import { getLocale } from '../assets/i18n/index.js';
+import { iconSun, iconMoon } from '../assets/icons.js';
 
 export class ThemeToggle extends LitElement {
   static styles = css`
@@ -6,10 +8,13 @@ export class ThemeToggle extends LitElement {
       background: none;
       border: 1px solid var(--color-border);
       color: var(--color-text);
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
       cursor: pointer;
-      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 0;
     }
   `;
 
@@ -39,9 +44,10 @@ export class ThemeToggle extends LitElement {
   }
 
   render() {
+    const t = getLocale();
     return html`
-      <button @click=${this._toggleTheme}>
-        ${this.theme === 'dark' ? '🌙 Dark' : '☀️ Light'} Mode
+      <button @click=${this._toggleTheme} title="${this.theme === 'dark' ? 'Dark' : 'Light'}">
+        ${this.theme === 'dark' ? iconMoon : iconSun}
       </button>
     `;
   }

@@ -1,9 +1,9 @@
 // Placeholder for English translations
 export default {
-  appTitle: 'HRING Employee Management',
+  appTitle: 'ING',
   nav: {
     employees: 'Employees',
-    add: 'Add Employee',
+    add: 'Add New',
   },
   employee: {
     firstName: 'First Name',
@@ -38,4 +38,4 @@ export default {
     phone: 'Invalid phone number.',
     unique: 'Employee already exists.'
   }
-};
+}; 
