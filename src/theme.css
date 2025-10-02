@@ -1,0 +1,31 @@
+:root {
+  --color-bg: #fff;
+  --color-text: #222;
+  --color-primary: #1976d2;
+  --color-border: #ddd;
+  --color-error: #d32f2f;
+}
+
+[data-theme="dark"] {
+  --color-bg: #181a1b;
+  --color-text: #eee;
+  --color-primary: #90caf9;
+  --color-border: #333;
+  --color-error: #ef5350;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background 0.2s, color 0.2s;
+}
+
+button, input, select {
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.error {
+  color: var(--color-error);
+}
