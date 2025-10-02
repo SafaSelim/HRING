@@ -5,6 +5,30 @@ export const employeeListStyles = css`
     display: block;
     padding: 1rem;
   }
+  .header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .view-toggle {
+    display: inline-flex;
+    gap: 0.25rem;
+  }
+  .view-toggle button {
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    color: var(--color-text);
+    border-radius: 6px;
+    padding: 0.35rem 0.45rem;
+    line-height: 0;
+    cursor: pointer;
+  }
+  .view-toggle button.active {
+    color: var(--color-primary);
+    background: rgba(25,118,210,0.06);
+  }
   .actions button {
     margin-right: 0.5rem;
   }
@@ -38,6 +62,34 @@ export const employeeListStyles = css`
   th {
     background: rgba(0,0,0,0.04);
   }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+  .grid-card {
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 1rem;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    overflow: hidden;
+    word-break: break-word;
+  }
+  .grid-card .inner {
+    display: flex;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .grid-card .col {
+    flex: 1 1 220px;
+    min-width: 0;
+  }
+  .grid-actions {
+    margin-top: 0.75rem;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
   .list-item {
     border: 1px solid var(--color-border);
     margin-bottom: 0.75rem;
@@ -61,10 +113,7 @@ export const employeeListStyles = css`
       align-items: flex-start;
       gap: 0.25rem;
     }
-  }
-  @media (max-width: 900px) {
-    input[type="search"] {
-      width: 100%;
-    }
+    .grid { grid-template-columns: minmax(0, 1fr); }
+    input[type="search"] { width: 100%; }
   }
 `;

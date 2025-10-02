@@ -3,7 +3,7 @@ export default {
   appTitle: 'ING',
   nav: {
     employees: 'Çalışanlar',
-    add: 'Çalışan Ekle',
+    add: 'Yeni Ekle',
   },
   employee: {
     firstName: 'Adı',

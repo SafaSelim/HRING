@@ -3,7 +3,7 @@ export default {
   appTitle: 'ING',
   nav: {
     employees: 'Employees',
-    add: 'Add Employee',
+    add: 'Add New',
   },
   employee: {
     firstName: 'First Name',
