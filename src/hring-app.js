@@ -25,16 +25,18 @@ export class HRingApp extends LitElement {
       { path: '/employees', component: 'employee-list' },
       {
         path: '/add',
+        component: 'employee-form',
         action: async () => {
           await import('./components/employee-form/employee-form.js');
-          return { component: 'employee-form' };
+          // return { component: 'employee-form' };
         }
       },
       {
         path: '/edit/:id',
+        component: 'employee-form',
         action: async () => {
           await import('./components/employee-form/employee-form.js');
-          return { component: 'employee-form' };
+          // return { component: 'employee-form' };
         }
       },
       { path: '(.*)', redirect: '/employees' }
