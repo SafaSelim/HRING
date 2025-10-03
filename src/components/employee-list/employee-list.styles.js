@@ -3,31 +3,33 @@ import { css } from 'lit';
 export const employeeListStyles = css`
   :host {
     display: block;
-    padding: 1rem;
+    padding: 0 1rem;
   }
   .header-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: var(--color-primary);
   }
   .view-toggle {
     display: inline-flex;
     gap: 0.25rem;
   }
   .view-toggle button {
-    border: 1px solid var(--color-border);
-    background: var(--color-bg);
+    border: none;
+    background: none;
     color: var(--color-text);
     border-radius: 6px;
     padding: 0.35rem 0.45rem;
     line-height: 0;
     cursor: pointer;
+    color: var(--color-primary);
   }
   .view-toggle button.active {
-    color: var(--color-primary);
-    background: rgba(25,118,210,0.06);
+    background: var(--color-primary-bg);
   }
   .actions button {
     margin-right: 0.5rem;

@@ -101,7 +101,7 @@ export class EmployeeList extends LitElement {
       </div>`;
     return html`
       <div class="header-row">
-        <h2>${t.employees}</h2>
+        <span>${t.employees}</span>
         ${toggle}
       </div>
       <input type="search" placeholder="${t.employee.search}" .value=${this.search} @input=${this._onSearch} />

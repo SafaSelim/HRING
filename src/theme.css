@@ -2,6 +2,7 @@
   --color-bg: #f8f8f8;
   --color-text: #222;
   --color-primary: #ff6200;
+  --color-primary-bg: #f7dbc9;
   --color-secondary: #525099;
   --color-border: #ddd;
   --color-error: #d32f2f;
@@ -11,6 +12,7 @@
   --color-bg: #181a1b;
   --color-text: #eee;
   --color-primary: #ff6200;
+  --color-primary-bg: #f7dbc9;
   --color-secondary: #7673d5;
   --color-border: #333;
   --color-error: #ef5350;
