@@ -4,7 +4,7 @@ import { selectAllEmployees } from '../../state/employees/employees.selectors.js
 import { deleteEmployee as deleteEmployeeAction } from '../../state/employees/employees.slice.js';
 import { getLocale } from '../../assets/i18n/index.js';
 import { employeeListStyles } from './employee-list.styles.js';
-import { employeeListTableTemplate, employeeListListTemplate, employeeListGridTemplate } from './employee-list.template.js';
+import { employeeListTableTemplate, employeeListGridTemplate } from './employee-list.template.js';
 import { Router } from '@vaadin/router';
 import { iconTable, iconGrid, iconChevronLeft, iconChevronRight } from '../../assets/icons.js';
 

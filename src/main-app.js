@@ -13,12 +13,13 @@ export class MainApp extends LitElement {
       min-height: 100vh;
       background: var(--color-bg);
       color: var(--color-text);
+      font-family: var(--app-font-family, 'Roboto', sans-serif);
     }
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.75rem 1rem;
+      padding: 0.25rem 1rem;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -33,6 +34,7 @@ export class MainApp extends LitElement {
       font-weight: 700;
       font-size: 1rem;
       white-space: nowrap;
+      color: var(--color-primary);
     }
     .brand img {
       height: 20px;
