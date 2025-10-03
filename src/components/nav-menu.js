@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { getLocale } from '../assets/i18n/index.js';
 import { Router } from '@vaadin/router';
-import { iconUser, iconPlus } from '../assets/icons.js';
+import { iconEmployees, iconPlus } from '../assets/icons.js';
 
 export class NavMenu extends LitElement {
   static styles = css`
@@ -51,7 +51,7 @@ export class NavMenu extends LitElement {
     const path = window.location.pathname;
     return html`
       <nav>
-        <a href="/employees" class="${path.startsWith('/employees') ? 'active' : ''}" @click=${this._navigate} title="${t.nav.employees}">${iconUser}<span>${t.nav.employees}</span></a>
+        <a href="/employees" class="${path.startsWith('/employees') ? 'active' : ''}" @click=${this._navigate} title="${t.nav.employees}">${iconEmployees}<span>${t.nav.employees}</span></a>
         <a href="/add" class="${path.startsWith('/add') ? 'active' : ''}" @click=${this._navigate} title="${t.nav.add}">${iconPlus}<span>${t.nav.add}</span></a>
       </nav>
     `;

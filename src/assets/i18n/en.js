@@ -1,6 +1,7 @@
 // Placeholder for English translations
 export default {
   appTitle: 'ING',
+  employees: 'Employees List',
   nav: {
     employees: 'Employees',
     add: 'Add New',

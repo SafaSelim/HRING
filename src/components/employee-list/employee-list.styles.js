@@ -38,6 +38,7 @@ export const employeeListStyles = css`
   .pagination {
     margin-top: 1rem;
     display: flex;
+    justify-content: center;
     gap: 0.5rem;
     align-items: center;
     background: var(--color-bg);

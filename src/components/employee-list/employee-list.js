@@ -6,7 +6,7 @@ import { getLocale } from '../../assets/i18n/index.js';
 import { employeeListStyles } from './employee-list.styles.js';
 import { employeeListTableTemplate, employeeListListTemplate, employeeListGridTemplate } from './employee-list.template.js';
 import { Router } from '@vaadin/router';
-import { iconHamburger, iconBento } from '../../assets/icons.js';
+import { iconTable, iconGrid, iconChevronLeft, iconChevronRight } from '../../assets/icons.js';
 
 export class EmployeeList extends LitElement {
   static properties = {
@@ -96,20 +96,20 @@ export class EmployeeList extends LitElement {
     const t = getLocale();
     const toggle = html`
       <div class="view-toggle" role="group" aria-label="View">
-        <button class="${this.view === 'table' ? 'active' : ''}" @click=${() => this._onToggleView('table')} title="Table">${iconHamburger}</button>
-        <button class="${this.view === 'grid' ? 'active' : ''}" @click=${() => this._onToggleView('grid')} title="Grid">${iconBento}</button>
+        <button class="${this.view === 'table' ? 'active' : ''}" @click=${() => this._onToggleView('table')} title="Table">${iconTable}</button>
+        <button class="${this.view === 'grid' ? 'active' : ''}" @click=${() => this._onToggleView('grid')} title="Grid">${iconGrid}</button>
       </div>`;
     return html`
       <div class="header-row">
-        <h2>${t.nav.employees}</h2>
+        <h2>${t.employees}</h2>
         ${toggle}
       </div>
       <input type="search" placeholder="${t.employee.search}" .value=${this.search} @input=${this._onSearch} />
       ${this.view === 'grid' ? employeeListGridTemplate(this, t) : employeeListTableTemplate(this, t)}
       <div class="pagination">
-        <button ?disabled=${this.page === 1} @click=${() => this._onPageChange(-1)}>&lt; Prev</button>
+        <button ?disabled=${this.page === 1} @click=${() => this._onPageChange(-1)}>${iconChevronLeft}</button>
         <span>Page ${this.page} / ${this._totalPages}</span>
-        <button ?disabled=${this.page === this._totalPages} @click=${() => this._onPageChange(1)}>Next &gt;</button>
+        <button ?disabled=${this.page === this._totalPages} @click=${() => this._onPageChange(1)}>${iconChevronRight}</button>
       </div>
     `;
   }

@@ -43,7 +43,7 @@ export class ThemeToggle extends LitElement {
     this._setTheme(this.theme === 'dark' ? 'light' : 'dark');
   }
 
-  render() {
+ render() {
     const t = getLocale();
     return html`
       <button @click=${this._toggleTheme} title="${this.theme === 'dark' ? 'Dark' : 'Light'}">
