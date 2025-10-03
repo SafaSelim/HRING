@@ -1,6 +1,6 @@
 import { css } from 'lit';
 
-export const sharedStyles = css`
+export const sharedFormStyles = css`
   /* Input Base Styles */
   .input-base {
     width: 100%;

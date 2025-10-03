@@ -56,7 +56,6 @@ export class MainApp extends LitElement {
     main {
       display: block;
       padding: 1rem;
-      max-width: 1200px;
       margin: 0 auto;
     }
     @media (max-width: 700px) {

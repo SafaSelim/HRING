@@ -7,6 +7,7 @@ import { employeeListStyles } from './employee-list.styles.js';
 import { employeeListTableTemplate, employeeListGridTemplate } from './employee-list.template.js';
 import { Router } from '@vaadin/router';
 import { iconTable, iconGrid, iconChevronLeft, iconChevronRight } from '../../assets/icons.js';
+import { sharedFormStyles } from '../../styles/form-styles.js';
 
 export class EmployeeList extends LitElement {
   static properties = {
@@ -17,7 +18,7 @@ export class EmployeeList extends LitElement {
     employees: { type: Array },
   };
 
-  static styles = employeeListStyles;
+  static styles = [sharedFormStyles, employeeListStyles];
 
   constructor() {
     super();
@@ -64,6 +65,30 @@ export class EmployeeList extends LitElement {
     this.page = Math.min(Math.max(1, next), max);
   }
 
+  _goToPage(p) {
+    const max = this._totalPages;
+    this.page = Math.min(Math.max(1, p), max);
+  }
+
+  _visiblePages() {
+    const total = this._totalPages;
+    const current = this.page;
+    const pages = [];
+    const push = p => pages.push(p);
+    if (total <= 7) {
+      for (let i = 1; i <= total; i++) push(i);
+      return pages;
+    }
+    push(1);
+    if (current > 4) pages.push('...');
+    const start = Math.max(2, current - 1);
+    const end = Math.min(total - 1, current + 1);
+    for (let i = start; i <= end; i++) push(i);
+    if (current < total - 3) pages.push('...');
+    push(total);
+    return pages;
+  }
+
   _onEdit(id) {
     Router.go(`/edit/${id}`);
   }
@@ -99,17 +124,23 @@ export class EmployeeList extends LitElement {
         <button class="${this.view === 'table' ? 'active' : ''}" @click=${() => this._onToggleView('table')} title="Table">${iconTable}</button>
         <button class="${this.view === 'grid' ? 'active' : ''}" @click=${() => this._onToggleView('grid')} title="Grid">${iconGrid}</button>
       </div>`;
+    const pages = this._visiblePages();
     return html`
       <div class="header-row">
         <span>${t.employees}</span>
         ${toggle}
       </div>
-      <input type="search" placeholder="${t.employee.search}" .value=${this.search} @input=${this._onSearch} />
+      <div class="search-field">
+        <input class="input-base input-text" type="search" placeholder="${t.employee.search}" .value=${this.search} @input=${this._onSearch} />
+      </div>
       ${this.view === 'grid' ? employeeListGridTemplate(this, t) : employeeListTableTemplate(this, t)}
       <div class="pagination">
-        <button ?disabled=${this.page === 1} @click=${() => this._onPageChange(-1)}>${iconChevronLeft}</button>
-        <span>Page ${this.page} / ${this._totalPages}</span>
-        <button ?disabled=${this.page === this._totalPages} @click=${() => this._onPageChange(1)}>${iconChevronRight}</button>
+        <button class="nav-btn" @click=${() => this._onPageChange(-1)} ?disabled=${this.page === 1}>${iconChevronLeft}</button>
+        ${pages.map(p => p === '...'
+          ? html`<span class="page-ellipsis">...</span>`
+          : html`<button class="page-btn ${this.page === p ? 'active' : ''}" @click=${() => this._goToPage(p)}>${p}</button>`)
+        }
+        <button class="nav-btn" @click=${() => this._onPageChange(1)} ?disabled=${this.page === this._totalPages}>${iconChevronRight}</button>
       </div>
     `;
   }
