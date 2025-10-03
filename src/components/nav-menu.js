@@ -1,7 +1,7 @@
 import { LitElement, html, css } from 'lit';
 import { getLocale } from '../assets/i18n/index.js';
 import { Router } from '@vaadin/router';
-import { iconUser, iconPlus } from '../assets/icons.js';
+import { iconEmployees, iconPlus } from '../assets/icons.js';
 
 export class NavMenu extends LitElement {
   static styles = css`
@@ -16,19 +16,17 @@ export class NavMenu extends LitElement {
       align-items: center;
       gap: 0.35rem;
       text-decoration: none;
-      color: var(--color-text);
-      font-weight: 600;
+      color: var(--color-primary);
+      font-weight: 400;
       padding: 0.35rem 0.6rem;
-      border-radius: 6px;
-      border: 1px solid transparent;
     }
     a:hover {
       background: rgba(0,0,0,0.03);
+      border-radius: 4px;
     }
     a.active {
       color: var(--color-primary);
-      border-color: var(--color-border);
-      background: rgba(25,118,210,0.06);
+    
     }
     @media (max-width: 700px) {
       nav { width: 100%; }
@@ -51,7 +49,7 @@ export class NavMenu extends LitElement {
     const path = window.location.pathname;
     return html`
       <nav>
-        <a href="/employees" class="${path.startsWith('/employees') ? 'active' : ''}" @click=${this._navigate} title="${t.nav.employees}">${iconUser}<span>${t.nav.employees}</span></a>
+        <a href="/employees" class="${path.startsWith('/employees') ? 'active' : ''}" @click=${this._navigate} title="${t.nav.employees}">${iconEmployees}<span>${t.nav.employees}</span></a>
         <a href="/add" class="${path.startsWith('/add') ? 'active' : ''}" @click=${this._navigate} title="${t.nav.add}">${iconPlus}<span>${t.nav.add}</span></a>
       </nav>
     `;

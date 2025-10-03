@@ -1,6 +1,7 @@
 // Turkish translations placeholder
 export default {
   appTitle: 'ING',
+  employees: 'Çalışanlar Listesi',
   nav: {
     employees: 'Çalışanlar',
     add: 'Yeni Ekle',

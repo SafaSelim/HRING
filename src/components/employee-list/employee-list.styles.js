@@ -3,65 +3,131 @@ import { css } from 'lit';
 export const employeeListStyles = css`
   :host {
     display: block;
-    padding: 1rem;
+    padding: 0 1rem;
   }
   .header-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    color: var(--color-primary);
   }
   .view-toggle {
     display: inline-flex;
     gap: 0.25rem;
   }
   .view-toggle button {
-    border: 1px solid var(--color-border);
-    background: var(--color-bg);
+    border: none;
+    background: none;
     color: var(--color-text);
     border-radius: 6px;
     padding: 0.35rem 0.45rem;
     line-height: 0;
     cursor: pointer;
+    color: var(--color-primary);
   }
   .view-toggle button.active {
-    color: var(--color-primary);
-    background: rgba(25,118,210,0.06);
+    background: var(--color-primary-bg);
   }
-  .actions button {
-    margin-right: 0.5rem;
+
+  /* Themed LIST view (table-like) */
+  .list {
+    display: block;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(34, 34, 34, 0.08);
   }
-  .toggle {
-    margin-bottom: 1rem;
+  [data-theme="dark"] .list {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   }
-  .pagination {
-    margin-top: 1rem;
-    display: flex;
+  .list-header,
+  .list-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1.1fr 1.2fr 1.1fr 1.2fr 1.6fr 1.1fr 1.2fr 1fr;
     gap: 0.5rem;
     align-items: center;
+  }
+  .list-header {
+    font-weight: 400;
+    color: var(--color-primary);
+    padding: 0.75rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .list-row {
+    padding: 0.9rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
     background: var(--color-bg);
     color: var(--color-text);
   }
-  input[type="search"] {
-    margin-bottom: 1rem;
-    padding: 0.5rem 0.75rem;
-    width: 320px;
-    max-width: 100%;
-    border-radius: 6px;
+  .cell {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
+  .actions {
+    display: inline-flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+
+    .edit-btn, .delete-btn {
+      background: none;
+      border: none;
+      color: var(--color-primary);
+      cursor: pointer;
+    }
   }
-  th, td {
-    border: 1px solid var(--color-border);
-    padding: 0.65rem;
-    text-align: left;
+
+  .pagination {
+    margin-top: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    color: var(--color-text);
   }
-  th {
-    background: rgba(0,0,0,0.04);
+  .page-btn {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    min-width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
   }
+  .page-btn.active {
+    background: var(--color-primary);
+    color: #fff;
+  }
+  .page-ellipsis {
+    opacity: 0.6;
+    padding: 0 0.25rem;
+  }
+  .nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-primary);
+    padding: 0.25rem;
+    line-height: 0;
+  }
+  .nav-btn:disabled {
+    opacity: 0.4;
+    cursor: default;
+  }
+
+  .search-field {
+    margin-bottom: 0.75rem;
+  }
+
+  /* GRID view */
   .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -90,30 +156,28 @@ export const employeeListStyles = css`
     gap: 0.5rem;
     flex-wrap: wrap;
   }
-  .list-item {
-    border: 1px solid var(--color-border);
-    margin-bottom: 0.75rem;
-    padding: 0.75rem;
-    border-radius: 8px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
+
+  @media (max-width: 1024px) {
+    .list-header,
+    .list-row {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1.2fr 1.6fr 1fr 1.2fr 1fr;
+    }
+  }
+  @media (max-width: 900px) {
+    .list-header,
+    .list-row {
+      grid-template-columns: 1fr 1fr 1fr 1.2fr 1.6fr auto;
+    }
+    .hide-md { display: none; }
   }
   @media (max-width: 720px) {
-    table, thead, tbody, th, td, tr {
+    .list-header { display: none; }
+    .list-row {
       display: block;
+      padding: 0.75rem;
     }
-    thead { display: none; }
-    tr { margin-bottom: 0.75rem; border: 1px solid var(--color-border); border-radius: 8px; padding: 0.5rem; }
-    td { border: none; padding: 0.35rem 0; }
-    .list-item {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.25rem;
-    }
+    .cell { white-space: normal; }
     .grid { grid-template-columns: minmax(0, 1fr); }
-    input[type="search"] { width: 100%; }
+    .search-field input { width: 100%; }
   }
 `;
