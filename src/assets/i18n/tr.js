@@ -6,6 +6,11 @@ export default {
     employees: 'Çalışanlar',
     add: 'Yeni Ekle',
   },
+  form: {
+    editTitle: 'Çalışanı Düzenle',
+    addTitle: 'Çalışan Ekle',
+    selectDate: 'Tarih Seçiniz',
+  },
   employee: {
     firstName: 'Adı',
     lastName: 'Soyadı',
@@ -38,5 +43,19 @@ export default {
     email: 'Geçersiz e-posta adresi.',
     phone: 'Geçersiz telefon numarası.',
     unique: 'Çalışan zaten mevcut.'
+  },
+  months: {
+    january: 'Ocak',
+    february: 'Şubat',
+    march: 'Mart',
+    april: 'Nisan',
+    may: 'Mayıs',
+    june: 'Haziran',
+    july: 'Temmuz',
+    august: 'Ağustos',
+    september: 'Eylül',
+    october: 'Ekim',
+    november: 'Kasım',
+    december: 'Aralık'
   }
 }; 

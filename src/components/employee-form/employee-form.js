@@ -6,6 +6,8 @@ import { addEmployee as addEmployeeAction, updateEmployee as updateEmployeeActio
 import { employeeFormStyles } from './employee-form.styles.js';
 import { employeeFormTemplate } from './employee-form.template.js';
 import { Router } from '@vaadin/router';
+import { sharedFormStyles } from '../../styles/form-styles.js';
+import '../../components/custom-date-picker.js';
 
 export class EmployeeForm extends LitElement {
   static properties = {
@@ -15,7 +17,7 @@ export class EmployeeForm extends LitElement {
     employeeId: { type: String },
   };
 
-  static styles = employeeFormStyles;
+  static styles = [sharedFormStyles, employeeFormStyles];
 
   constructor() {
     super();
@@ -74,6 +76,13 @@ export class EmployeeForm extends LitElement {
 
   _onInput(e) {
     const { name, value } = e.target;
+    this.form = { ...this.form, [name]: value };
+    this.errors = { ...this.errors, [name]: undefined };
+  }
+
+  _onDateChange(e) {
+    const { value } = e.detail;
+    const name = e.target.name;
     this.form = { ...this.form, [name]: value };
     this.errors = { ...this.errors, [name]: undefined };
   }

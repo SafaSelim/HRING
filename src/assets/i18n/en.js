@@ -6,6 +6,11 @@ export default {
     employees: 'Employees',
     add: 'Add New',
   },
+  form: {
+    editTitle: 'Edit Employee',
+    addTitle: 'Add Employee',
+    selectDate: 'Select date',
+  },
   employee: {
     firstName: 'First Name',
     lastName: 'Last Name',
@@ -38,5 +43,19 @@ export default {
     email: 'Invalid email address.',
     phone: 'Invalid phone number.',
     unique: 'Employee already exists.'
+  },
+  months: {
+    january: 'January',
+    february: 'February',
+    march: 'March',
+    april: 'April',
+    may: 'May',
+    june: 'June',
+    july: 'July',
+    august: 'August',
+    september: 'September',
+    october: 'October',
+    november: 'November',
+    december: 'December'
   }
 }; 

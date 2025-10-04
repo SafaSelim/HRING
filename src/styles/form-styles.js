@@ -12,6 +12,7 @@ export const sharedFormStyles = css`
     border: 1px solid var(--color-border);
     border-radius: 8px;
     outline: none;
+    box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease;
   }
 

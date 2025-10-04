@@ -1,5 +1,6 @@
 :root {
   --color-bg: #f8f8f8;
+  --color-bg-card: #fff;
   --color-text: #222;
   --color-primary: #ff6200;
   --color-primary-bg: #f7dbc9;
@@ -10,6 +11,7 @@
 
 [data-theme="dark"] {
   --color-bg: #181a1b;
+  --color-bg-card: #252627;
   --color-text: #eee;
   --color-primary: #ff6200;
   --color-primary-bg: #f7dbc9;
