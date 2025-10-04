@@ -11,13 +11,19 @@ export default {
     addTitle: 'Çalışan Ekle',
     selectDate: 'Tarih Seçiniz',
   },
+  deletionDialog: {
+    title: "Are you sure?",
+    deleteMessage: 'Selected Employee record of {name} {surname} will be deleted',
+    confirm: "Proceed",
+    cancel: "Cancel"
+  },
   employee: {
     firstName: 'Adı',
     lastName: 'Soyadı',
     dateOfEmployment: 'İşe Giriş Tarihi',
     dateOfBirth: 'Doğum Tarihi',
-    phoneNumber: 'Telefon Numarası',
-    email: 'E-posta Adresi',
+    phoneNumber: 'Telefon',
+    email: 'E-posta',
     department: 'Departman',
     position: 'Pozisyon',
     actions: 'İşlemler',

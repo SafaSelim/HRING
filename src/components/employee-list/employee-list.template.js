@@ -28,7 +28,7 @@ export function employeeListTableTemplate(ctx, t) {
           <div class="cell" style="text-align:right;">
             <span class="actions">
               <button class="edit-btn" @click=${() => ctx._onEdit(emp.id)} title="${t.employee.edit}" aria-label="${t.employee.edit}">${iconEdit}</button>
-              <button class="delete-btn" @click=${() => ctx._onDelete(emp.id)} title="${t.employee.delete}" aria-label="${t.employee.delete}">${iconTrash}</button>
+              <button class="delete-btn" @click=${() => ctx._onDelete(emp)} title="${t.employee.delete}" aria-label="${t.employee.delete}">${iconTrash}</button>
             </span>
           </div>
         </div>
@@ -82,7 +82,7 @@ export function employeeListGridTemplate(ctx, t) {
           </div>
           <div class="grid-actions">
             <button class="edit-btn" @click=${() => ctx._onEdit(emp.id)} title="${t.employee.edit}" aria-label="${t.employee.edit}">${iconEdit} ${t.employee.edit}</button>
-            <button class="delete-btn" @click=${() => ctx._onDelete(emp.id)} title="${t.employee.delete}" aria-label="${t.employee.delete}">${iconTrash} ${t.employee.delete}</button>
+            <button class="delete-btn" @click=${() => ctx._onDelete(emp)} title="${t.employee.delete}" aria-label="${t.employee.delete}">${iconTrash} ${t.employee.delete}</button>
           </div>
         </div>
       `)}

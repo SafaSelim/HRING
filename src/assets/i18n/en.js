@@ -11,13 +11,19 @@ export default {
     addTitle: 'Add Employee',
     selectDate: 'Select date',
   },
+  deletionDialog: {
+    title: "Are you sure?",
+    deleteMessage: 'Selected Employee record of {name} {surname} will be deleted',
+    confirm: "Proceed",
+    cancel: "Cancel"
+  },
   employee: {
     firstName: 'First Name',
     lastName: 'Last Name',
     dateOfEmployment: 'Date of Employment',
     dateOfBirth: 'Date of Birth',
-    phoneNumber: 'Phone Number',
-    email: 'Email Address',
+    phoneNumber: 'Phone',
+    email: 'Email',
     department: 'Department',
     position: 'Position',
     actions: 'Actions',

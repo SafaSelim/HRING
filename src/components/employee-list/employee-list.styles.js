@@ -142,7 +142,7 @@ export const employeeListStyles = css`
     width: 90%;
   }
   .grid-card {
-    background: var(--color-bg);
+    background: var(--color-bg-card);
     border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 1.5rem;

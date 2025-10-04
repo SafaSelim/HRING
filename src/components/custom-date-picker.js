@@ -171,6 +171,17 @@ export class CustomDatePicker extends LitElement {
     this.selectedDate = null;
   }
 
+  willUpdate(changedProperties) {
+    if (changedProperties.has('value') && this.value) {
+      const parts = this.value.split('-');
+      if (parts.length === 3) {
+        const [year, month, day] = parts;
+        this.selectedDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+        this.currentDate = new Date(this.selectedDate);
+      }
+    }
+  }
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('click', this._handleClick);
