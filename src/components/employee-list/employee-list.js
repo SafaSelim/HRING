@@ -111,14 +111,21 @@ export class EmployeeList extends LitElement {
       .replace('{surname}', employee.lastName);
     this.confirmDialog.confirmText = t.deletionDialog.confirm || 'Delete';
     this.confirmDialog.cancelText = t.deletionDialog.cancel || 'Cancel';
-    this.confirmDialog.open = true;
-
-    const handleConfirm = () => {
-      store.dispatch(deleteEmployeeAction(employee.id));
-      this.confirmDialog.removeEventListener('confirm', handleConfirm);
-    };
     
-    this.confirmDialog.addEventListener('confirm', handleConfirm);
+    this.pendingDeleteId = employee.id;
+    
+    this.confirmDialog.open = true;
+  }
+
+  _handleDialogConfirm() {
+    if (this.pendingDeleteId) {
+      store.dispatch(deleteEmployeeAction(this.pendingDeleteId));
+      this.pendingDeleteId = null;
+    }
+  }
+  
+  _handleDialogCancel() {
+    this.pendingDeleteId = null;
   }
 
   get _filteredEmployees() {
@@ -163,7 +170,10 @@ export class EmployeeList extends LitElement {
         }
         <button class="nav-btn" @click=${() => this._onPageChange(1)} ?disabled=${this.page === this._totalPages}>${iconChevronRight}</button>
       </div>
-      <confirm-dialog @confirm=${this._handleConfirm}></confirm-dialog>
+      <confirm-dialog 
+        @confirm=${this._handleDialogConfirm}
+        @cancel=${this._handleDialogCancel}
+      ></confirm-dialog>
     `;
   }
 }

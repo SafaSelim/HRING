@@ -12,10 +12,10 @@ export default {
     selectDate: 'Tarih Seçiniz',
   },
   deletionDialog: {
-    title: "Are you sure?",
-    deleteMessage: 'Selected Employee record of {name} {surname} will be deleted',
-    confirm: "Proceed",
-    cancel: "Cancel"
+    title: "Emin misiniz?",
+    deleteMessage: 'Seçili Çalışan kaydı {name} {surname} silinecektir',
+    confirm: "Onayla",
+    cancel: "İptal"
   },
   employee: {
     firstName: 'Adı',
