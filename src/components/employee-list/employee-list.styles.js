@@ -3,7 +3,7 @@ import { css } from 'lit';
 export const employeeListStyles = css`
   :host {
     display: block;
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
   .header-row {
     display: flex;
@@ -47,9 +47,10 @@ export const employeeListStyles = css`
     grid-template-columns: 1.1fr 1.1fr 1.2fr 1.1fr 1.2fr 1.6fr 1.1fr 1.2fr 1fr;
     gap: 0.5rem;
     align-items: center;
+    background: var(--color-bg-card);
   }
   .list-header {
-    font-weight: 400;
+    font-weight: 500;
     color: var(--color-primary);
     padding: 0.75rem 0.75rem;
     border-bottom: 1px solid var(--color-border);
@@ -57,7 +58,6 @@ export const employeeListStyles = css`
   .list-row {
     padding: 0.9rem 0.75rem;
     border-bottom: 1px solid var(--color-border);
-    background: var(--color-bg);
     color: var(--color-text);
   }
   .cell {
@@ -67,6 +67,10 @@ export const employeeListStyles = css`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-weight: 300;
+  }
+  .cell.bold {
+    font-weight: 500;
   }
   .actions {
     display: inline-flex;
@@ -120,41 +124,87 @@ export const employeeListStyles = css`
   }
   .nav-btn:disabled {
     opacity: 0.4;
+    color: var(--color-text);
     cursor: default;
   }
 
   .search-field {
     margin-bottom: 0.75rem;
+    background: var(--color-bg-card);
   }
 
   /* GRID view */
   .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+    gap: 3rem;
+    margin: 2rem auto;
+    width: 90%;
   }
   .grid-card {
+    background: var(--color-bg-card);
     border: 1px solid var(--color-border);
-    border-radius: 8px;
-    padding: 1rem;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.06);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     overflow: hidden;
     word-break: break-word;
   }
   .grid-card .inner {
-    display: flex;
-    gap: 1.25rem;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
   }
   .grid-card .col {
-    flex: 1 1 220px;
     min-width: 0;
   }
+  .grid-card .field {
+    margin-bottom: 0.75rem;
+  }
+  .grid-card .field-label {
+    font-size: 0.875rem;
+    color: var(--color-text);
+    opacity: 0.7;
+    margin-bottom: 0.25rem;
+    font-weight: 400;
+  }
+  .grid-card .field-value {
+    font-size: 0.95rem;
+    color: var(--color-text);
+    font-weight: 500;
+  }
   .grid-actions {
-    margin-top: 0.75rem;
     display: flex;
+    gap: 0.75rem;
+    justify-content: flex-start;
+  }
+  .grid-actions .edit-btn,
+  .grid-actions .delete-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
     gap: 0.5rem;
-    flex-wrap: wrap;
+    border: none;
+    transition: all 0.2s ease;
+  }
+  .grid-actions .edit-btn {
+    background: #525099;
+    color: #fff;
+  }
+  .grid-actions .edit-btn:hover {
+    background: #43407a;
+  }
+  .grid-actions .delete-btn {
+    background: var(--color-primary);
+    color: #fff;
+  }
+  .grid-actions .delete-btn:hover {
+    background: #e55a00;
   }
 
   @media (max-width: 1024px) {
@@ -171,13 +221,20 @@ export const employeeListStyles = css`
     .hide-md { display: none; }
   }
   @media (max-width: 720px) {
+    :host {
+      padding: 0 1rem;
+    }
     .list-header { display: none; }
     .list-row {
       display: block;
       padding: 0.75rem;
     }
     .cell { white-space: normal; }
-    .grid { grid-template-columns: minmax(0, 1fr); }
+    .grid { 
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      margin: 1.25rem 0;
+    }
     .search-field input { width: 100%; }
   }
 `;

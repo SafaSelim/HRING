@@ -23,7 +23,7 @@ export class MainApp extends LitElement {
       position: sticky;
       top: 0;
       z-index: 10;
-      background: var(--color-bg);
+      background: var(--color-bg-card);
       border-bottom: 1px solid var(--color-border);
       gap: 0.75rem;
     }

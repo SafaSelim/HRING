@@ -6,13 +6,24 @@ export default {
     employees: 'Çalışanlar',
     add: 'Yeni Ekle',
   },
+  form: {
+    editTitle: 'Çalışanı Düzenle',
+    addTitle: 'Çalışan Ekle',
+    selectDate: 'Tarih Seçiniz',
+  },
+  deletionDialog: {
+    title: "Emin misiniz?",
+    deleteMessage: 'Seçili Çalışan kaydı {name} {surname} silinecektir',
+    confirm: "Onayla",
+    cancel: "İptal"
+  },
   employee: {
     firstName: 'Adı',
     lastName: 'Soyadı',
     dateOfEmployment: 'İşe Giriş Tarihi',
     dateOfBirth: 'Doğum Tarihi',
-    phoneNumber: 'Telefon Numarası',
-    email: 'E-posta Adresi',
+    phoneNumber: 'Telefon',
+    email: 'E-posta',
     department: 'Departman',
     position: 'Pozisyon',
     actions: 'İşlemler',
@@ -38,5 +49,19 @@ export default {
     email: 'Geçersiz e-posta adresi.',
     phone: 'Geçersiz telefon numarası.',
     unique: 'Çalışan zaten mevcut.'
+  },
+  months: {
+    january: 'Ocak',
+    february: 'Şubat',
+    march: 'Mart',
+    april: 'Nisan',
+    may: 'Mayıs',
+    june: 'Haziran',
+    july: 'Temmuz',
+    august: 'Ağustos',
+    september: 'Eylül',
+    october: 'Ekim',
+    november: 'Kasım',
+    december: 'Aralık'
   }
 }; 

@@ -8,6 +8,7 @@ import { employeeListTableTemplate, employeeListGridTemplate } from './employee-
 import { Router } from '@vaadin/router';
 import { iconTable, iconGrid, iconChevronLeft, iconChevronRight } from '../../assets/icons.js';
 import { sharedFormStyles } from '../../styles/form-styles.js';
+import '../confirm-dialog.js';
 
 export class EmployeeList extends LitElement {
   static properties = {
@@ -29,6 +30,9 @@ export class EmployeeList extends LitElement {
     this.employees = [];
   }
 
+  firstUpdated() {
+    this.confirmDialog = this.shadowRoot.querySelector('confirm-dialog');
+  }
 
   connectedCallback() {
     super.connectedCallback();
@@ -93,11 +97,35 @@ export class EmployeeList extends LitElement {
     Router.go(`/edit/${id}`);
   }
 
-  _onDelete(id) {
-    const t = getLocale();
-    if (window.confirm(t.employee.confirmDelete)) {
-      store.dispatch(deleteEmployeeAction(id));
+  _onDelete(employee) {
+    console.log(employee);
+    if (!this.confirmDialog) {
+      console.error('Confirm dialog not found');
+      return;
     }
+    const t = getLocale();
+    
+    this.confirmDialog.title = t.deletionDialog.title;
+    this.confirmDialog.message = t.deletionDialog.deleteMessage
+      .replace('{name}', employee.firstName)
+      .replace('{surname}', employee.lastName);
+    this.confirmDialog.confirmText = t.deletionDialog.confirm || 'Delete';
+    this.confirmDialog.cancelText = t.deletionDialog.cancel || 'Cancel';
+    
+    this.pendingDeleteId = employee.id;
+    
+    this.confirmDialog.open = true;
+  }
+
+  _handleDialogConfirm() {
+    if (this.pendingDeleteId) {
+      store.dispatch(deleteEmployeeAction(this.pendingDeleteId));
+      this.pendingDeleteId = null;
+    }
+  }
+  
+  _handleDialogCancel() {
+    this.pendingDeleteId = null;
   }
 
   get _filteredEmployees() {
@@ -142,6 +170,10 @@ export class EmployeeList extends LitElement {
         }
         <button class="nav-btn" @click=${() => this._onPageChange(1)} ?disabled=${this.page === this._totalPages}>${iconChevronRight}</button>
       </div>
+      <confirm-dialog 
+        @confirm=${this._handleDialogConfirm}
+        @cancel=${this._handleDialogCancel}
+      ></confirm-dialog>
     `;
   }
 }
