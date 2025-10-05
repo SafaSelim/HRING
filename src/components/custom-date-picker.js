@@ -69,6 +69,31 @@ export class CustomDatePicker extends LitElement {
       justify-content: space-between;
       padding: 16px;
       border-bottom: 1px solid var(--color-border);
+      gap: 0.5rem;
+    }
+
+    .month-select, .year-select {
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-size: 1rem;
+      padding: 6px 12px;
+      margin: 0 0.25rem;
+      outline: none;
+      transition: border-color 0.2s;
+      box-shadow: none;
+      appearance: none;
+      min-width: 80px;
+      font-family: inherit;
+    }
+    .month-select:focus, .year-select:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px rgba(255,98,0,0.08);
+    }
+    .month-select option, .year-select option {
+      background: var(--color-bg);
+      color: var(--color-text);
     }
     
     .month-year {
@@ -267,23 +292,45 @@ export class CustomDatePicker extends LitElement {
     return days;
   }
 
-  _getMonthYearString() {
+
+  _getMonthOptions() {
     const t = getLocale();
-    const monthNames = [
+    return [
       t.months.january, t.months.february, t.months.march, t.months.april,
       t.months.may, t.months.june, t.months.july, t.months.august,
       t.months.september, t.months.october, t.months.november, t.months.december
     ];
-    const month = monthNames[this.currentDate.getMonth()];
-    const year = this.currentDate.getFullYear();
-    return `${month} ${year}`.toUpperCase();
+  }
+
+  _getYearOptions() {
+    const currentYear = new Date().getFullYear();
+    const years = [];
+    for (let y = currentYear - 50; y <= currentYear + 10; y++) {
+      years.push(y);
+    }
+    return years;
+  }
+
+  _onMonthSelect(e) {
+    const month = parseInt(e.target.value, 10);
+    this.currentDate.setMonth(month);
+    this.requestUpdate();
+  }
+
+  _onYearSelect(e) {
+    const year = parseInt(e.target.value, 10);
+    this.currentDate.setFullYear(year);
+    this.requestUpdate();
   }
 
   render() {
     const t = getLocale();
     const days = this._getCalendarDays();
     const dayLabels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-    
+    const monthOptions = this._getMonthOptions();
+    const yearOptions = this._getYearOptions();
+    const currentMonth = this.currentDate.getMonth();
+    const currentYear = this.currentDate.getFullYear();
     return html`
       <div class="date-picker-container">
         <input 
@@ -299,19 +346,21 @@ export class CustomDatePicker extends LitElement {
         <div class="calendar-icon">
           ${iconCalendar}
         </div>
-        
         <div class="calendar-popup ${this.open ? 'open' : ''}">
           <div class="calendar-header">
             <button class="nav-button" @click=${() => this._navigateMonth(-1)}>‹</button>
-            <div class="month-year">${this._getMonthYearString()}</div>
+            <select class="month-select" @change=${this._onMonthSelect} .value=${String(currentMonth)}>
+              ${monthOptions.map((m, i) => html`<option value="${i}" ?selected=${i === currentMonth}>${m}</option>`)}
+            </select>
+            <select class="year-select" @change=${this._onYearSelect} .value=${String(currentYear)}>
+              ${yearOptions.map(y => html`<option value="${y}" ?selected=${y === currentYear}>${y}</option>`)}
+            </select>
             <button class="nav-button" @click=${() => this._navigateMonth(1)}>›</button>
           </div>
-          
           <div class="calendar-grid">
             <div class="day-labels">
               ${dayLabels.map(label => html`<div class="day-label">${label}</div>`)}
             </div>
-            
             <div class="calendar-days">
               ${days.map(day => html`
                 <div 
