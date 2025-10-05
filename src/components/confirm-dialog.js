@@ -140,7 +140,6 @@ export class ConfirmDialog extends LitElement {
 
   static properties = {
     open: { type: Boolean, reflect: true },
-    close: { type: Boolean, reflect: true},
     title: { type: String },
     message: { type: String },
     confirmText: { type: String },
@@ -180,13 +179,11 @@ export class ConfirmDialog extends LitElement {
 
   close() {
     this.open = false;
-    this.close = true;
     this.dispatchEvent(new CustomEvent('cancel', { bubbles: true }));
   }
 
   confirm() {
     this.open = false;
-    this.close = true;
     this.dispatchEvent(new CustomEvent('confirm', { bubbles: true }));
   }
 
