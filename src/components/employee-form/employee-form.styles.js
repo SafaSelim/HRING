@@ -171,23 +171,55 @@ export const employeeFormStyles = css`
     font-size: 0.75rem;
     margin-top: 0.25rem;
   }
-  @media (max-width: 1024px) {
-    form {
-      grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 1200px) {
+    .form {
+      width: 98%;
+      gap: 2rem;
+    }
+    .form-card {
+      padding: 1.5rem;
     }
   }
-  @media (max-width: 768px) {
-    :host {
+  @media (max-width: 900px) {
+    .form {
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      gap: 1.5rem;
+    }
+    .form-card {
       padding: 1rem;
     }
-    form {
+  }
+  @media (max-width: 600px) {
+    :host {
+      padding: 0.5rem;
+    }
+    .form {
       grid-template-columns: 1fr;
+      width: 100%;
+      gap: 1rem;
+    }
+    .form-card {
+      margin: 0 0.25rem 1rem 0.25rem;
+      padding: 0.5rem;
     }
     .btn-group {
       flex-direction: column;
+      gap: 0.5rem;
     }
     .btn {
       width: 100%;
+      min-width: unset;
+      padding: 0.75rem 1.5rem;
+    }
+    .form-header {
+      padding: 1rem;
+    }
+    .form-title {
+      font-size: 1.1rem;
+    }
+    .form-subtitle {
+      font-size: 0.95rem;
     }
   }
 `;
