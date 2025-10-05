@@ -294,7 +294,7 @@ export class CustomDatePicker extends LitElement {
           .required=${this.required}
           readonly
           @click=${this._toggleCalendar}
-          placeholder="${t.form.selectDate}"
+          placeholder="${t.form.selectDatePlacebolder}"
         />
         <div class="calendar-icon">
           ${iconCalendar}

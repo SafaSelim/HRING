@@ -9,7 +9,8 @@ export default {
   form: {
     editTitle: 'Edit Employee',
     addTitle: 'Add Employee',
-    selectDate: 'Select date',
+    selectDatePlacebolder: 'Select date',
+    selectPlaceholder: 'Please select',
   },
   deletionDialog: {
     title: "Are you sure?",

@@ -9,7 +9,8 @@ export default {
   form: {
     editTitle: 'Çalışanı Düzenle',
     addTitle: 'Çalışan Ekle',
-    selectDate: 'Tarih Seçiniz',
+    selectDatePlacebolder: 'Tarih Seçiniz',
+    selectPlaceholder: 'Lütfen seçiniz',
   },
   deletionDialog: {
     title: "Emin misiniz?",
