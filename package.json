@@ -6,7 +6,8 @@
   "scripts": {
     "start": "wds --config web-dev-server.config.mjs",
     "test": "web-test-runner --coverage",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "postbuild": "copy public\\_redirects dist\\_redirects"
   },
   "author": "SafaSelim",
   "license": "MIT",
