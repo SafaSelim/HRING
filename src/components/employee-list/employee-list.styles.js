@@ -207,34 +207,46 @@ export const employeeListStyles = css`
     background: #e55a00;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1200px) {
     .list-header,
     .list-row {
-      grid-template-columns: 1fr 1fr 1fr 1fr 1.2fr 1.6fr 1fr 1.2fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1.2fr 1.2fr 1fr 1fr 1fr;
+    }
+    .grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
     }
   }
   @media (max-width: 900px) {
     .list-header,
     .list-row {
-      grid-template-columns: 1fr 1fr 1fr 1.2fr 1.6fr auto;
+      grid-template-columns: 1fr 1fr 1fr 1.2fr 1.2fr auto;
     }
     .hide-md { display: none; }
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
   }
   @media (max-width: 720px) {
     :host {
-      padding: 0 1rem;
+      padding: 0 0.5rem;
     }
     .list-header { display: none; }
     .list-row {
       display: block;
-      padding: 0.75rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      background: var(--color-bg-card);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
-    .cell { white-space: normal; }
-    .grid { 
-      grid-template-columns: minmax(0, 1fr);
-      gap: 1.25rem;
-      margin: 1.25rem 0;
-    }
+    .cell { white-space: normal; font-size: 0.98rem; }
     .search-field input { width: 100%; }
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+      margin: 0.75rem 0;
+    }
   }
 `;

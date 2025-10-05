@@ -77,41 +77,63 @@ export class EmployeeForm extends LitElement {
   _onInput(e) {
     const { name, value } = e.target;
     this.form = { ...this.form, [name]: value };
-    this.errors = { ...this.errors, [name]: undefined };
+
+    const newErrors = { ...this.errors };
+    delete newErrors[name];
+    this.errors = newErrors;
   }
 
   _onDateChange(e) {
     const { value } = e.detail;
     const name = e.target.name;
     this.form = { ...this.form, [name]: value };
-    this.errors = { ...this.errors, [name]: undefined };
+
+    const newErrors = { ...this.errors };
+    delete newErrors[name];
+    this.errors = newErrors;
   }
 
   _validate() {
-    const t = getLocale();
     const errors = {};
+
     for (const key of Object.keys(this.form)) {
-      if (!this.form[key]) errors[key] = t.validation.required;
+      const value = this.form[key];
+      if (!value || (typeof value === 'string' && !value.trim())) {
+        errors[key] = 'required';
+      }
     }
-    if (this.form.email && !/^\S+@\S+\.\S+$/.test(this.form.email)) {
-      errors.email = t.validation.email;
+
+    if (this.form.email && this.form.email.trim()) {
+      if (!/^\S+@\S+\.\S+$/.test(this.form.email)) {
+        errors.email = 'email';
+      }
     }
-    if (this.form.phoneNumber && !/^\+?\d{10,15}$/.test(this.form.phoneNumber)) {
-      errors.phoneNumber = t.validation.phone;
+
+    if (this.form.phoneNumber && this.form.phoneNumber.trim()) {
+      if (!/^\+?\d{10,15}$/.test(this.form.phoneNumber)) {
+        errors.phoneNumber = 'phone';
+      }
     }
-    if (this.mode === 'add') {
-      const exists = (this._employees || []).some(e =>
+
+    if (this.mode === 'add' && this._employees && this._employees.length > 0) {
+      const exists = this._employees.some(e =>
         e.firstName === this.form.firstName &&
         e.lastName === this.form.lastName &&
         e.dateOfBirth === this.form.dateOfBirth
       );
       if (exists) {
-        errors.firstName = t.validation.unique;
-        errors.lastName = t.validation.unique;
-        errors.dateOfBirth = t.validation.unique;
+        errors.firstName = 'unique';
+        errors.lastName = 'unique';
+        errors.dateOfBirth = 'unique';
       }
     }
+
     return errors;
+  }
+
+  _getErrorMessage(errorType) {
+    const t = getLocale();
+    return t.validation[errorType] || errorType;
   }
 
   _onSubmit(e) {
